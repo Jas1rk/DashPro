@@ -5,7 +5,7 @@ import ProfileImage from "/user.png";
 
 const Navbar = () => {
   return (
-    <header className="w-full bg-white shadow-md p-3  flex justify-between items-center z-50">
+    <header className="w-full bg-white shadow-md p-3 flex justify-between items-center z-50">
       <h1 className="font-medium text-lg">DashPro</h1>
 
       <input
@@ -23,7 +23,7 @@ const Navbar = () => {
         />
       </div>
       <div className="sm:hidden">
-        <FontAwesomeIcon icon={faBars} className="text-2xl cursor-pointer" />
+        <FontAwesomeIcon icon={faBars} className="text-2xl cursor-pointer"/>
       </div>
     </header>
   );

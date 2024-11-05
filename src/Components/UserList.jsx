@@ -23,16 +23,16 @@ const UserList = () => {
   }, []);
   return (
     <>
-      <section className="bg-white rounded-md shadow-md p-3 w-96 sm:w-[42rem]">
+     <section className="bg-white rounded-md shadow-md p-3  sm:w-[42rem] h-[30rem]">
         <h2 className="font-bold">USERS</h2>
-        <div className="overflow-x-auto">
-          <table className="min-w-full border border-gray-300 shadow-md rounded-lg overflow-hidden">
+        <div className="overflow-y-auto overflow-x-hidden h-[25rem]  scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 scrollbar-thumb-rounded-lg ">
+          <table className="w-[80%] border border-gray-300 shadow-md rounded-lg overflow-hidden">
             <thead className="bg-blue-900 text-white">
               <tr>
                 {["Name", "Email", "Mobile", "Website"].map((head) => (
                   <th
                     key={head}
-                    className="px-4 py-3 text-left text-sm font-medium"
+                    className="p-2 text-left text-sm font-medium"
                   >
                     {head}
                   </th>
@@ -43,7 +43,7 @@ const UserList = () => {
               {loading ? (
                 Array.from({ length: 5 }).map((_, index) => (
                   <tr key={index} className="bg-white border-b">
-                    <td className="px-6 py-4 text-sm text-gray-700">
+                    <td className="p-2 text-sm text-gray-700">
                       <Skeleton count={1} width={`80%`} />
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-700">
@@ -64,17 +64,17 @@ const UserList = () => {
                       className="bg-white border-b hover:bg-gray-100"
                       key={user.id}
                     >
-                      <td className="px-6 py-4 text-sm text-gray-700">
-                        {user?.username || <Skeleton />}
+                      <td className="p-3 text-sm text-gray-700">
+                        {user?.username}
                       </td>
                       <td className="px-6 py-4 text-sm text-gray-700">
-                        {user?.email || <Skeleton />}
+                        {user?.email}
                       </td>
                       <td className="px-6 py-4 text-sm text-gray-700">
-                        {user?.phone || <Skeleton />}
+                        {user?.phone}
                       </td>
                       <td className="px-6 py-4 text-sm text-blue-600 underline">
-                        {user?.website || <Skeleton />}
+                        {user?.website}
                       </td>
                     </tr>
                   ))}

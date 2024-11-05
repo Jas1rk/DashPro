@@ -31,7 +31,7 @@ const Weather = () => {
   console.log("another data", weather);
   return (
     <div className="flex flex-col">
-      <div className="bg-white rounded-lg shadow-lg p-6 max-w-sm mx-auto">
+      <div className="bg-white rounded-lg shadow-lg p-6 w-[90%] sm:w-[120%] mx-auto">
         <h2 className="text-2xl font-bold mb-2">London</h2>
         <div className="flex items-center justify-between mb-4">
           <img

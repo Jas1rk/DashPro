@@ -12,8 +12,8 @@ import {
 const Chart = ({ weatherData }) => {
   console.log("here is data", weatherData);
   return (
-    <div className="bg-white p-2 rounded-lg shadow-md ">
-      <ResponsiveContainer width="100%" height={400}>
+    <div className="bg-white p-2 rounded-lg shadow-md w-[90%] sm:w-[100%] ">
+      <ResponsiveContainer width="100%" height={200}>
         <LineChart data={weatherData}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="date" />
