@@ -1,11 +1,29 @@
-import React from 'react'
+import React from "react";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  CartesianGrid,
+  ResponsiveContainer,
+} from "recharts";
 
-const Chart = () => {
+const Chart = ({ weatherData }) => {
+  console.log("here is data", weatherData);
   return (
-    <div className='bg-green-400'>
-       Chart
+    <div className="bg-white p-2 rounded-lg shadow-md ">
+      <ResponsiveContainer width="100%" height={400}>
+        <LineChart data={weatherData}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="date" />
+          <YAxis dataKey="temperature" />
+          <Tooltip />
+          <Line type="monotone" dataKey="temperature" stroke="#8884d8" />
+        </LineChart>
+      </ResponsiveContainer>
     </div>
-  )
-}
+  );
+};
 
-export default Chart
+export default Chart;
