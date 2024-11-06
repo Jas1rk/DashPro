@@ -1,29 +1,96 @@
-import React from "react";
-import { jsPDF } from "jspdf";
-import html2canvas from "html2canvas";
+import React, { useRef } from "react";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
+import { Chart, registerables } from "chart.js";
 
-const PdfExport = ({ contentRef }) => {
-  const handlePdf = async () => {
-    const doc = new jsPDF();
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(12);
-    const content = contentRef.current;
-    if (content) {
-      const canvas = await html2canvas(content);
-      const imageData = canvas.toDataURL("image/png");
-      doc.addImage(imageData, "PNG", 10, 10, 190, 0);
-      doc.save("dashboard.pdf");
-    } else {
-      alert("no content");
-    }
+Chart.register(...registerables);
+
+const PdfExport = ({ users, dailyData }) => {
+  const chartRef = useRef();
+
+  const renderChart = () => {
+    new Chart(chartRef.current, {
+      type: "line",
+      data: {
+        labels: dailyData.map(day => day.date),
+        datasets: [
+          {
+            label: "Temperature",
+            data: dailyData.map(day => day.temperature),
+            fill: false,
+            borderColor: "#003366",
+            tension: 0.1,
+          },
+        ],
+      },
+      options: {
+        plugins: { legend: { display: true, position: "top" } },
+        scales: {
+          x: { title: { display: true, text: "Date" } },
+          y: { title: { display: true, text: "Temperature (°C)" } },
+        },
+      },
+    });
   };
+
+
+  const handlePdfExport = async () => {
+    const doc = new jsPDF();
+
+    doc.setFontSize(16);
+    doc.setFont("helvetica", "bold");
+    doc.text("Weather Report", 14, 15);
+
+    doc.setFontSize(12);
+    doc.text("User List", 14, 25);
+    doc.autoTable({
+      startY: 30,
+      head: [["No", "Username", "Email", "Mobile"]],
+      body: users.map((user, index) => [
+        index + 1,
+        user.username,
+        user.email,
+        user.phone,
+      ]),
+      theme: "striped",
+      headStyles: { fillColor: [0, 51, 102], textColor: [255, 255, 255] },
+    });
+
+    doc.text("Weather Data", 14, doc.lastAutoTable.finalY + 10);
+    doc.autoTable({
+      startY: doc.lastAutoTable.finalY + 15,
+      head: [["No", "Date", "Temperature (°C)"]],
+      body: dailyData.map((day, index) => [
+        index + 1,
+        day.date,
+        `${day.temperature}°C`,
+      ]),
+      theme: "striped",
+      headStyles: { fillColor: [0, 51, 102], textColor: [255, 255, 255] },
+    });
+
+    const chartImage = chartRef.current.toDataURL("image/png", 1.0);
+    doc.addPage();
+    doc.setFontSize(14);
+    doc.text("Temperature Graph", 14, 15);
+    doc.addImage(chartImage, "PNG", 10, 15, 150, 100);
+
+    doc.save("Weather_Report.pdf");
+  };
+
   return (
-    <button
-      className="bg-blue-900 text-white rounded-md p-2"
-      onClick={handlePdf}
-    >
-      Download PDF
-    </button>
+    <div>
+      <canvas ref={chartRef} width="300" height="200" style={{ display: "none" }} />
+      <button
+        onClick={() => {
+          renderChart();
+          setTimeout(handlePdfExport, 500); 
+        }}
+        className="bg-blue-900 text-white rounded-md p-2 mt-4 m-0"
+      >
+        Download PDF
+      </button>
+    </div>
   );
 };
 

@@ -5,10 +5,9 @@ import Weather from "../Components/Weather";
 import Sidebar from "../Components/Sidebar";
 import PdfExport from "../Components/PdfExport";
 
-
 const Home = () => {
-  const dashboardref = useRef(null);
-  
+  const [users, setUsers] = useState([]);
+  const [dailyData, setDailyData] = useState([]);
 
   return (
     <>
@@ -18,14 +17,13 @@ const Home = () => {
 
         <div className="flex flex-col">
           <div className="flex justify-end items-end">
-            <PdfExport contentRef={dashboardref}/>
+            <PdfExport users={users} dailyData={dailyData} />
           </div>
 
-          <div ref={dashboardref} className="flex flex-col mt-3 sm:flex-row md:flex-row gap-5">
-            <UserList />
-            <div>
-              <Weather />
-            </div>
+          <div className="flex flex-col mt-3 sm:flex-row md:flex-row  gap-5">
+            <UserList onUserData={setUsers} />
+
+            <Weather onDailyData={setDailyData} />
           </div>
         </div>
       </div>

@@ -3,7 +3,7 @@ import axios from "axios";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-const UserList = () => {
+const UserList = ({onUserData}) => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -13,6 +13,7 @@ const UserList = () => {
           "https://jsonplaceholder.typicode.com/users"
         );
         setUsers(data);
+        onUserData(data)
       } catch (err) {
         console.log(err);
       } finally {
@@ -25,7 +26,7 @@ const UserList = () => {
     <>
      <section className="bg-white rounded-md shadow-md p-3  sm:w-[42rem] h-[30rem]">
         <h2 className="font-bold">USERS</h2>
-        <div className="overflow-y-auto overflow-x-hidden h-[25rem]  scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 scrollbar-thumb-rounded-lg ">
+        <div className="overflow-y-auto overflow-x-auto h-[25rem]  scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 scrollbar-thumb-rounded-lg ">
           <table className="w-[80%] border border-gray-300 shadow-md rounded-lg overflow-hidden">
             <thead className="bg-blue-900 text-white">
               <tr>
