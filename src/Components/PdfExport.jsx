@@ -2,6 +2,8 @@ import React, { useRef } from "react";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { Chart, registerables } from "chart.js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFileExport } from "@fortawesome/free-solid-svg-icons";
 
 Chart.register(...registerables);
 
@@ -12,11 +14,11 @@ const PdfExport = ({ users, dailyData }) => {
     new Chart(chartRef.current, {
       type: "line",
       data: {
-        labels: dailyData.map(day => day.date),
+        labels: dailyData.map((day) => day.date),
         datasets: [
           {
             label: "Temperature",
-            data: dailyData.map(day => day.temperature),
+            data: dailyData.map((day) => day.temperature),
             fill: false,
             borderColor: "#003366",
             tension: 0.1,
@@ -32,7 +34,6 @@ const PdfExport = ({ users, dailyData }) => {
       },
     });
   };
-
 
   const handlePdfExport = async () => {
     const doc = new jsPDF();
@@ -80,14 +81,21 @@ const PdfExport = ({ users, dailyData }) => {
 
   return (
     <div>
-      <canvas ref={chartRef} width="300" height="200" style={{ display: "none" }} />
+      <canvas
+        ref={chartRef}
+        width="300"
+        height="200"
+        style={{ display: "none" }}
+      />
+
       <button
         onClick={() => {
           renderChart();
-          setTimeout(handlePdfExport, 500); 
+          setTimeout(handlePdfExport, 500);
         }}
-        className="bg-blue-900 text-white rounded-md p-2 mt-4 m-0"
+        className="bg-blue-900 text-white font-light rounded-md  mt-4 p-2 "
       >
+        <FontAwesomeIcon icon={faFileExport} className="mr-2" />
         Download PDF
       </button>
     </div>

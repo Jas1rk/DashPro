@@ -11,8 +11,8 @@ import {
 
 const Chart = ({ weatherData }) => {
   return (
-    <div className="bg-white p-2 rounded-lg shadow-md w-[90%]">
-      <ResponsiveContainer width="100%" height={200}>
+    <div className="bg-white p-5 rounded-lg shadow-md mt-28 ">
+      <ResponsiveContainer width="100%" height={300}>
         <LineChart data={weatherData}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="date" />
