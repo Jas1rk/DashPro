@@ -27,7 +27,7 @@ const UserList = ({ onUserData }) => {
       <section className="h-[23rem] p-8 md:p-0">
         <div className=" container mx-auto p-5 bg-white rounded-md shadow-md mt-24">
           <h2 className="font-bold">USERS</h2>
-          <div className="overflow-y-auto overflow-x-auto h-[20rem]   scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 scrollbar-thumb-rounded-lg ">
+          <div className="overflow-y-auto overflow-x-auto h-[20rem] scrollbar-thin scrollbar-thumb-blue-900 scrollbar-track-transparent scrollbar-thumb-rounded-lg ">
             <table className="  shadow-md rounded-lg overflow-hidden">
               <thead className="bg-blue-900 text-white">
                 <tr>

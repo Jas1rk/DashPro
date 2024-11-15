@@ -1,3 +1,4 @@
+
 import React from "react";
 import {
   LineChart,
@@ -11,7 +12,8 @@ import {
 
 const Chart = ({ weatherData }) => {
   return (
-    <div className="bg-white p-5 rounded-lg shadow-md mt-28 ">
+    <div className="md:p-2 p-6">
+    <div className="bg-white rounded-lg p-2 shadow-md md:mt-28 ">
       <ResponsiveContainer width="100%" height={300}>
         <LineChart data={weatherData}>
           <CartesianGrid strokeDasharray="3 3" />
@@ -21,6 +23,8 @@ const Chart = ({ weatherData }) => {
           <Line type="monotone" dataKey="temperature" stroke="#8884d8" />
         </LineChart>
       </ResponsiveContainer>
+    </div>
+
     </div>
   );
 };

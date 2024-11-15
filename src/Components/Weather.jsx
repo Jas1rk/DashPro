@@ -6,7 +6,6 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 const Weather = ({ onDailyData }) => {
   const [weather, setWeather] = useState(null);
-  const [dailyData, setDailyData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -21,7 +20,6 @@ const Weather = ({ onDailyData }) => {
           temperature: entry.main.temp,
         }));
         onDailyData(dailyData);
-        setDailyData(dailyData);
         setWeather(result[Math.floor(Math.random() * result.length)]);
       } catch (err) {
         console.log(err.message);
@@ -33,7 +31,7 @@ const Weather = ({ onDailyData }) => {
   }, []);
 
   return (
-    <div className="mt-24  w-full p-8 md:p-0 ">
+    <div className="mt-32 md:mt-24  w-full p-8 md:p-0 ">
       {loading ? (
         <Skeleton count={5} />
       ) : (

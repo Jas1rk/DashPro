@@ -1,25 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBell, faBars } from "@fortawesome/free-solid-svg-icons";
+import { faBell, faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import ProfileImage from "/user.png";
 import PdfExport from "./PdfExport";
-import Sidebar from "./Sidebar";
+import Search from "./Search";
+import Mobilenavbar from "./Mobilenavbar";
 
 const Navbar = ({ users, dailyData }) => {
+  const [menu, setMenu] = useState(false);
+
   return (
     <header className="bg-white shadow-md w-full fixed z-50">
       <nav className="container mx-auto flex items-center justify-between p-4">
         <h1 className="font-bold text-2xl text-blue-900">DashPro</h1>
         <div className="flex-grow max-w-full sm:max-w-sm md:max-w-md lg:mx-w-lg mx-4">
-          <input
-            type="search"
-            placeholder="search items..."
-            className="w-full p-2 rounded-md bg-white-700 border text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-blue-600"
-          />
+          <Search users={users} />
         </div>
-        {/* <div>
+        <div>
           <PdfExport users={users} dailyData={dailyData} />
-        </div> */}
+        </div>
 
         <div className="hidden sm:flex items-center gap-3 md:gap-5">
           <FontAwesomeIcon icon={faBell} className="text-2xl cursor-pointer" />
@@ -30,10 +29,22 @@ const Navbar = ({ users, dailyData }) => {
           />
         </div>
         <div className="sm:hidden">
-          <FontAwesomeIcon icon={faBars} className="text-2xl cursor-pointer" />
+          {!menu ? (
+            <FontAwesomeIcon
+              icon={faBars}
+              className="text-2xl cursor-pointer"
+              onClick={() => setMenu(true)}
+            />
+          ) : (
+            <FontAwesomeIcon
+              icon={faXmark}
+              className="text-2xl cursor-pointer"
+              onClick={() => setMenu(false)}
+            />
+          )}
         </div>
       </nav>
-    
+      {menu && <Mobilenavbar />}
     </header>
   );
 };

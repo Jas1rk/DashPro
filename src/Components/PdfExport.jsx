@@ -93,7 +93,7 @@ const PdfExport = ({ users, dailyData }) => {
           renderChart();
           setTimeout(handlePdfExport, 500);
         }}
-        className="bg-blue-900 text-white font-light rounded-md  mt-4 p-2 "
+        className="bg-blue-900 text-white font-light text-sm rounded-md p-2 mr-2 "
       >
         <FontAwesomeIcon icon={faFileExport} className="mr-2" />
         Download PDF

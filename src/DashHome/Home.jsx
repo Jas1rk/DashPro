@@ -12,10 +12,10 @@ const Home = () => {
 
   return (
     <>
-      <Navbar />
-      <div className="flex gap-10 ">
+      <Navbar users={users} dailyData={dailyData} />
+      <div className="flex gap-10">
         <Sidebar />
-        <div className="flex  flex-col">
+        <div className="flex  flex-col ">
           <div className="md:flex gap-5">
             <UserList onUserData={setUsers} />
 
