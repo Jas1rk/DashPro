@@ -14,7 +14,7 @@ const Mobilenavbar = () => {
     item10: "Logout",
   };
   return (
-    <nav className="sm:hidden flex flex-col bg-blue-950 text-white p-3 space-y-2 z-50">
+    <nav className="sm:hidden flex flex-col bg-blue-950 text-white p-3 z-50">
       {Object.keys(navitems).map((data, index) => (
         <div key={index} className="flex list-none gap-2 mt-1">
           <li className="">{navitems[data]}</li>
